@@ -121,11 +121,68 @@
   <data name="loginPnl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="simpleButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>332, 209</value>
+  </data>
+  <data name="simpleButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="simpleButton1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="simpleButton1.Text" xml:space="preserve">
+    <value>Quick Login</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.Name" xml:space="preserve">
+    <value>simpleButton1</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.SimpleButton, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.Parent" xml:space="preserve">
+    <value>loginPnl</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="exitLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="exitLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="exitLbl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 24pt</value>
+  </data>
+  <data name="exitLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>466, 19</value>
+  </data>
+  <data name="exitLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 39</value>
+  </data>
+  <data name="exitLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="exitLbl.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;exitLbl.Name" xml:space="preserve">
+    <value>exitLbl</value>
+  </data>
+  <data name="&gt;&gt;exitLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exitLbl.Parent" xml:space="preserve">
+    <value>loginPnl</value>
+  </data>
+  <data name="&gt;&gt;exitLbl.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="notifacationLbl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="notifacationLbl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 11.25pt</value>
   </data>
@@ -154,7 +211,7 @@
     <value>loginPnl</value>
   </data>
   <data name="&gt;&gt;notifacationLbl.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="usernameLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -190,7 +247,7 @@
     <value>loginPnl</value>
   </data>
   <data name="&gt;&gt;usernameLbl.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="usernameTxtF.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -217,7 +274,7 @@
     <value>loginPnl</value>
   </data>
   <data name="&gt;&gt;usernameTxtF.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="passwordLbl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -250,7 +307,7 @@
     <value>loginPnl</value>
   </data>
   <data name="&gt;&gt;passwordLbl.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="passwordTxtF.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -277,7 +334,7 @@
     <value>loginPnl</value>
   </data>
   <data name="&gt;&gt;passwordTxtF.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="loginBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -313,7 +370,7 @@
     <value>loginPnl</value>
   </data>
   <data name="&gt;&gt;loginBtn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="loginPnl.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 129</value>

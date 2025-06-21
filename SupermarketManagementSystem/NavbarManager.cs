@@ -62,5 +62,42 @@ namespace SupermarketManagementSystem
                 throw new KeyNotFoundException($"Label control '{selectedKey}' not found.");
             }
         }
+        public static void rollTool()
+        {
+            // Hide all labels first
+            foreach (var label in labelInstances.Values)
+            {
+                label.Visible = false;
+            }
+            
+            // Check if user is set before proceeding
+            if (User.CurrentUser == null)
+            {
+                return; // Exit early if no user is set
+            }
+            
+            if(User.CurrentUser.roll == "A")//Admin
+            {
+                foreach (var label in labelInstances.Values)
+                {
+                    label.Visible = true;
+                }
+            }
+            else if(User.CurrentUser.roll == "C")//Cashier
+            {
+                posNavLbl.Visible = true;
+                profileNavLbl.Visible = true;
+                logoutNavLbl.Visible= true;
+            }
+            else if (User.CurrentUser.roll == "IM")// Inventory Manager
+            {
+                dashboardNavLbl.Visible = true;
+                inventoryNavLbl.Visible = true;
+                reportsNavLbl.Visible = true;      
+                profileNavLbl.Visible = true;
+                logoutNavLbl.Visible = true;
+            }
+        }
+
     }
 }

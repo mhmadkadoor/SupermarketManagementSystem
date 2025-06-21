@@ -30,49 +30,86 @@ namespace SupermarketManagementSystem
 
         public static void ShowPanelByName(string panelName)
         {
-            // Hide all panels  
-            if (dashboardPnl != null) dashboardPnl.Visible = false;
-            if (posPnl != null) posPnl.Visible = false;
-            if (profilePnl != null) profilePnl.Visible = false;
-            if (reportPnl != null) reportPnl.Visible = false;
-            if (inventoryPnl != null) inventoryPnl.Visible = false;
 
             // Show the specified panel based on the name  
             switch (panelName.ToLower())
             {
                 case "dashboard":
-                    if (dashboardPnl != null) 
-                    dashboardPnl.Left = (currentForm.ClientSize.Width - dashboardPnl.Width) / 2;
-                    dashboardPnl.Top = (currentForm.ClientSize.Height - dashboardPnl.Height) / 2 + 44;
-                    dashboardPnl.Visible = true;
-                    NavbarManager.SwitchTo("Dashboard");
-                    currentForm.Text = "Dashboard";
+                    if (dashboardPnl != null)
+                    {
+                        if (posPnl != null) posPnl.Visible = false;
+                        if (profilePnl != null) profilePnl.Visible = false;
+                        if (reportPnl != null) reportPnl.Visible = false;
+                        if (inventoryPnl != null) inventoryPnl.Visible = false;
+
+                        dashboardPnl.Left = (currentForm.ClientSize.Width - dashboardPnl.Width) / 2;
+                        dashboardPnl.Top = (currentForm.ClientSize.Height - dashboardPnl.Height) / 2 + 44;
+                        dashboardPnl.Visible = true;
+                        NavbarManager.SwitchTo("Dashboard");
+                        currentForm.Text = "Dashboard";
+                    }
                     break;
                 case "pos":
-                    if (posPnl != null)
+                    if (posPnl != null) {
+                        if (dashboardPnl != null) dashboardPnl.Visible = false;
+                        if (profilePnl != null) profilePnl.Visible = false;
+                        if (reportPnl != null) reportPnl.Visible = false;
+                        if (inventoryPnl != null) inventoryPnl.Visible = false;
+
                         posPnl.Left = (currentForm.ClientSize.Width - posPnl.Width) / 2;
                         posPnl.Top = (currentForm.ClientSize.Height - posPnl.Height) / 2 + 44;
-                    posPnl.Visible = true;
-                    NavbarManager.SwitchTo("POS");
-                    currentForm.Text = "POS";
+                        posPnl.Visible = true;
+                        
+                        NavbarManager.SwitchTo("POS");
+                        currentForm.Text = "POS";
+
+                    }
                     break;
                 case "profile":
-                    if (profilePnl != null) 
-                    profilePnl.Left = (currentForm.ClientSize.Width - profilePnl.Width) / 2;
+                    if (profilePnl != null) {
+                        if (dashboardPnl != null) dashboardPnl.Visible = false;
+                        if (posPnl != null) posPnl.Visible = false;
+                        if (reportPnl != null) reportPnl.Visible = false;
+                        if (inventoryPnl != null) inventoryPnl.Visible = false;
+
+                        profilePnl.Left = (currentForm.ClientSize.Width - profilePnl.Width) / 2;
                     profilePnl.Top = (currentForm.ClientSize.Height - profilePnl.Height) / 2 + 44;
                     profilePnl.Visible = true;
                     NavbarManager.SwitchTo("Profile");
                     currentForm.Text = "Profile";
+                    }
                     break;
                 case "report":
-                    if (reportPnl != null) reportPnl.Visible = true;
-                    NavbarManager.SwitchTo("Reports");
-                    currentForm.Text = "Reports";
+                    if (reportPnl != null)
+                    {
+                        if (dashboardPnl != null) dashboardPnl.Visible = false;
+                        if (posPnl != null) posPnl.Visible = false;
+                        if (profilePnl != null) profilePnl.Visible = false;
+                        if (inventoryPnl != null) inventoryPnl.Visible = false;
+
+                        reportPnl.Left = (currentForm.ClientSize.Width - reportPnl.Width) / 2;
+                        reportPnl.Top = (currentForm.ClientSize.Height - reportPnl.Height) / 2 + 44;
+
+                        reportPnl.Visible = true;
+                        NavbarManager.SwitchTo("Reports");
+                        currentForm.Text = "Reports";
+                    }
                     break;
                 case "inventory":
-                    if (inventoryPnl != null) inventoryPnl.Visible = true;
-                    NavbarManager.SwitchTo("Inventory");
-                    currentForm.Text = "Inventory";
+                    if (inventoryPnl != null)
+                    {
+                        if (dashboardPnl != null) dashboardPnl.Visible = false;
+                        if (posPnl != null) posPnl.Visible = false;
+                        if (profilePnl != null) profilePnl.Visible = false;
+                        if (reportPnl != null) reportPnl.Visible = false;
+
+                        inventoryPnl.Left = (currentForm.ClientSize.Width - inventoryPnl.Width) / 2;
+                        inventoryPnl.Top = (currentForm.ClientSize.Height - inventoryPnl.Height) / 2 + 44;
+
+                        inventoryPnl.Visible = true;
+                        NavbarManager.SwitchTo("Inventory");
+                        currentForm.Text = "Inventory";
+                    }
                     break;
                 default:
                     throw new ArgumentException("Invalid panel name.");

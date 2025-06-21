@@ -10,8 +10,7 @@ namespace SupermarketManagementSystem
 {
     internal class DatabaseManager
     {
-        //private static readonly string DbPath = "local.db";
-        private static readonly string DbPath = "C:\\Users\\mhmad\\source\\repos\\SupermarketManagementSystem\\SupermarketManagementSystem\\local.db";
+        public static readonly string DbPath = "local.db";
         public static void InitializeDatabase()
         {
             try
@@ -48,7 +47,7 @@ namespace SupermarketManagementSystem
             }
         }
 
-        public static void AddUser(string username, string firstname, string lastname, string password)
+        public static void AddUser(string username, string firstname, string lastname, string password, string roll)
         {
             try
             {
@@ -57,11 +56,11 @@ namespace SupermarketManagementSystem
                     connection.Open();
 
                     // Hash the password
-                    string hashedPassword = HashPassword(password);
+                    string hashedPassword = HashPassword(password, username);
 
                     string insertUserQuery = @"
-                        INSERT INTO users (username, firstname, lastname, password)
-                        VALUES (@username, @firstname, @lastname, @password);";
+                        INSERT INTO users (username, firstname, lastname, password, roll)
+                        VALUES (@username, @firstname, @lastname, @password, @roll);";
 
                     using (var command = new SQLiteCommand(insertUserQuery, connection))
                     {
@@ -69,6 +68,7 @@ namespace SupermarketManagementSystem
                         command.Parameters.AddWithValue("@firstname", firstname);
                         command.Parameters.AddWithValue("@lastname", lastname);
                         command.Parameters.AddWithValue("@password", hashedPassword);
+                        command.Parameters.AddWithValue("@roll", roll);
 
                         command.ExecuteNonQuery();
                         Console.WriteLine("User added successfully!");
@@ -81,6 +81,19 @@ namespace SupermarketManagementSystem
             }
         }
 
+        private static string HashPassword(string password, string username)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password + username + "Ol3ama"));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
         private static string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -111,7 +124,7 @@ namespace SupermarketManagementSystem
                         if (result != null)
                         {
                             string storedHashedPassword = result.ToString();
-                            string hashedPassword = HashPassword(password);
+                            string hashedPassword = HashPassword(password, username);
                             return storedHashedPassword == hashedPassword;
                         }
                     }
@@ -146,7 +159,8 @@ namespace SupermarketManagementSystem
                                   { "username", reader["username"].ToString() },
                                   { "firstname", reader["firstname"].ToString() },
                                   { "lastname", reader["lastname"].ToString() },
-                                  { "password", reader["password"].ToString() }
+                                  { "password", reader["password"].ToString() },
+                                  { "roll", reader["roll"].ToString() }
                               };
                             }
                         }
@@ -271,7 +285,7 @@ namespace SupermarketManagementSystem
                     using (var command = new SQLiteCommand(updatePasswordQuery, connection))
                     {
                         command.Parameters.AddWithValue("@username", username);
-                        command.Parameters.AddWithValue("@password", HashPassword(newPassword));
+                        command.Parameters.AddWithValue("@password", HashPassword(newPassword, username));
                         command.ExecuteNonQuery();
                         Console.WriteLine("User password updated successfully!");
                     }
@@ -282,7 +296,7 @@ namespace SupermarketManagementSystem
                 Console.WriteLine($"Error updating user password: {ex.Message}");
             }
         }
-        public static void AddProduct(string barcode, string productName, int quantity, double price, string category)
+        public static void AddProduct(string barcode, string productName, int quantity, double price, string category, int criticalAmount)
         {
             try
             {
@@ -290,8 +304,8 @@ namespace SupermarketManagementSystem
                 {
                     connection.Open();
                     string insertProductQuery = @"
-                        INSERT INTO inventory (barcode, product_name, quantity, price, category)
-                        VALUES (@barcode, @product_name, @quantity, @price, @category);";
+                        INSERT INTO inventory (barcode, product_name, quantity, price, category, critical_amount)
+                        VALUES (@barcode, @product_name, @quantity, @price, @category, @critical_amount);";
                     using (var command = new SQLiteCommand(insertProductQuery, connection))
                     {
                         command.Parameters.AddWithValue("@barcode", barcode);
@@ -299,6 +313,7 @@ namespace SupermarketManagementSystem
                         command.Parameters.AddWithValue("@quantity", quantity);
                         command.Parameters.AddWithValue("@price", price);
                         command.Parameters.AddWithValue("@category", category);
+                        command.Parameters.AddWithValue("@critical_amount", criticalAmount);
                         command.ExecuteNonQuery();
                         Console.WriteLine("Product added successfully!");
                     }
@@ -354,7 +369,8 @@ namespace SupermarketManagementSystem
                                     { "product_name", reader["product_name"] },
                                     { "quantity", reader["quantity"] },
                                     { "price", reader["price"] },
-                                    { "category", reader["category"] }
+                                    { "category", reader["category"] },
+                                    { "critical_amount", reader["critical_amount"] }
                                 };
                             }
                         }
@@ -367,8 +383,499 @@ namespace SupermarketManagementSystem
             }
             return null;
         }
+        public static void RecAction(string username, string actionName)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+
+                    // Ensure the action exists in the actions table
+                    string insertActionQuery = @"
+                        INSERT OR IGNORE INTO actions (action_name) VALUES (@action_name);";
+                    using (var actionCmd = new SQLiteCommand(insertActionQuery, connection))
+                    {
+                        actionCmd.Parameters.AddWithValue("@action_name", actionName);
+                        actionCmd.ExecuteNonQuery();
+                    }
+
+                    // Get user id
+                    int userId = GetUserIdByUsername(username);
+                    if (userId == -1)
+                    {
+                        Console.WriteLine("User not found for action logging.");
+                        return;
+                    }
+
+                    // Insert into actions_history
+                    string insertHistoryQuery = @"
+                        INSERT INTO actions_history (user_id, action) VALUES (@user_id, @action);";
+                    using (var historyCmd = new SQLiteCommand(insertHistoryQuery, connection))
+                    {
+                        historyCmd.Parameters.AddWithValue("@user_id", userId);
+                        historyCmd.Parameters.AddWithValue("@action", actionName);
+                        historyCmd.ExecuteNonQuery();
+                        Console.WriteLine("Action recorded successfully!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error recording action: {ex.Message}");
+            }
+        }
     
-         
+        public static void EditProduct(string barcode, string productName, int quantity, double price, string category, int criticalAmount)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    // Check if product exists
+                    string selectProductQuery = @"SELECT COUNT(*) FROM inventory WHERE barcode = @barcode;";
+                    using (var selectCmd = new SQLiteCommand(selectProductQuery, connection))
+                    {
+                        selectCmd.Parameters.AddWithValue("@barcode", barcode);
+                        var result = selectCmd.ExecuteScalar();
+                        if (Convert.ToInt32(result) == 0)
+                        {
+                            Console.WriteLine("Product not found.");
+                            return;
+                        }
+                    }
+
+                    // Update product details
+                    string updateProductQuery = @"
+                        UPDATE inventory
+                        SET product_name = @product_name,
+                            quantity = @quantity,
+                            price = @price,
+                            category = @category,
+                            critical_amount = @critical_amount
+                        WHERE barcode = @barcode;";
+                    using (var updateCmd = new SQLiteCommand(updateProductQuery, connection))
+                    {
+                        updateCmd.Parameters.AddWithValue("@product_name", productName);
+                        updateCmd.Parameters.AddWithValue("@quantity", quantity);
+                        updateCmd.Parameters.AddWithValue("@price", price);
+                        updateCmd.Parameters.AddWithValue("@category", category);
+                        updateCmd.Parameters.AddWithValue("@critical_amount", criticalAmount);
+                        updateCmd.Parameters.AddWithValue("@barcode", barcode);
+                        updateCmd.ExecuteNonQuery();
+                        Console.WriteLine("Product updated successfully!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error editing product: {ex.Message}");
+            }
+        }
+    
+        public static void SellProduct(string barcode, int quantity)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    // Check current quantity
+                    string selectQuery = "SELECT quantity FROM inventory WHERE barcode = @barcode;";
+                    using (var selectCmd = new SQLiteCommand(selectQuery, connection))
+                    {
+                        selectCmd.Parameters.AddWithValue("@barcode", barcode);
+                        var result = selectCmd.ExecuteScalar();
+                        if (result == null)
+                        {
+                            Console.WriteLine("Product not found.");
+                            return;
+                        }
+                        int currentQuantity = Convert.ToInt32(result);
+                        if (currentQuantity < quantity)
+                        {
+                            Console.WriteLine("Not enough stock to sell.");
+                            return;
+                        }
+                        int newQuantity = currentQuantity - quantity;
+                        string updateQuery = "UPDATE inventory SET quantity = @quantity WHERE barcode = @barcode;";
+                        using (var updateCmd = new SQLiteCommand(updateQuery, connection))
+                        {
+                            updateCmd.Parameters.AddWithValue("@quantity", newQuantity);
+                            updateCmd.Parameters.AddWithValue("@barcode", barcode);
+                            updateCmd.ExecuteNonQuery();
+                            RecordSale(barcode, quantity);
+                            Console.WriteLine("Product sold successfully!");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error selling product: {ex.Message}");
+            }
+        }
+
+        public static Boolean ProductExsit(string barcode)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string selectQuery = "SELECT COUNT(*) FROM inventory WHERE barcode = @barcode;";
+                    using (var command = new SQLiteCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@barcode", barcode);
+                        var result = command.ExecuteScalar();
+                        return Convert.ToInt32(result) > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking product existence: {ex.Message}");
+            }
+            return false;
+        }
+
+        public static Dictionary<string, object>[] GetAllProducts()
+        {
+            var products = new List<Dictionary<string, object>>();
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string selectAllQuery = "SELECT * FROM inventory;";
+                    using (var command = new SQLiteCommand(selectAllQuery, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var product = new Dictionary<string, object>
+                                {
+                                    { "barcode", reader["barcode"] },
+                                    { "product_name", reader["product_name"] },
+                                    { "quantity", reader["quantity"] },
+                                    { "price", reader["price"] },
+                                    { "category", reader["category"] },
+                                    { "critical_amount", reader["critical_amount"] }
+                                };
+                                products.Add(product);
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving all products: {ex.Message}");
+            }
+            return products.ToArray();
+        }
+
+        public static Dictionary<string, object>[] SearchInv(string searchTerm)
+        {
+            var products = new List<Dictionary<string, object>>();
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string selectQuery = @"
+                        SELECT * FROM inventory
+                        WHERE barcode LIKE @search
+                           OR product_name LIKE @search
+                           OR category LIKE @search
+                           OR price LIKE @search;";
+                    using (var command = new SQLiteCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@search", "%" + searchTerm + "%");
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var product = new Dictionary<string, object>
+                                {
+                                    { "barcode", reader["barcode"] },
+                                    { "product_name", reader["product_name"] },
+                                    { "quantity", reader["quantity"] },
+                                    { "price", reader["price"] },
+                                    { "category", reader["category"] },
+                                    { "critical_amount", reader["critical_amount"] }
+                                };
+                                products.Add(product);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching inventory: {ex.Message}");
+            }
+            return products.ToArray();
+        }
+        public static void InitializeSalesTable()
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string createSalesTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS sales (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            barcode TEXT NOT NULL,
+                            product_name TEXT NOT NULL,
+                            quantity_sold INTEGER NOT NULL,
+                            unit_price REAL NOT NULL,
+                            total_price REAL NOT NULL,
+                            sale_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+                            user_id INTEGER,
+                            FOREIGN KEY (user_id) REFERENCES users(id)
+                        );";
+
+                    using (var command = new SQLiteCommand(createSalesTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating sales table: {ex.Message}");
+            }
+        }
+
+        // Record a sale
+        public static void RecordSale(string barcode, int quantitySold)
+        {   
+            var product = GetProductInfoByBarcode(barcode);
+            string productName = product["product_name"].ToString();
+            double unitPrice = (double)product["price"];
+            int userId = User.CurrentUser.id;
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string insertSaleQuery = @"
+                        INSERT INTO sales (barcode, product_name, quantity_sold, unit_price, total_price, user_id)
+                        VALUES (@barcode, @product_name, @quantity_sold, @unit_price, @total_price, @user_id);";
+
+                    using (var command = new SQLiteCommand(insertSaleQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@barcode", barcode);
+                        command.Parameters.AddWithValue("@product_name", productName);
+                        command.Parameters.AddWithValue("@quantity_sold", quantitySold);
+                        command.Parameters.AddWithValue("@unit_price", unitPrice);
+                        command.Parameters.AddWithValue("@total_price", quantitySold * unitPrice);
+                        command.Parameters.AddWithValue("@user_id", userId);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error recording sale: {ex.Message}");
+            }
+        }
+
+        // Get sales data for a specific date range
+        public static List<Dictionary<string, object>> GetSalesData(DateTime startDate, DateTime endDate)
+        {
+            var salesData = new List<Dictionary<string, object>>();
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string selectSalesQuery = @"
+                        SELECT s.*, u.username 
+                        FROM sales s 
+                        LEFT JOIN users u ON s.user_id = u.id 
+                        WHERE DATE(s.sale_date) BETWEEN @start_date AND @end_date
+                        ORDER BY s.sale_date DESC;";
+
+                    using (var command = new SQLiteCommand(selectSalesQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@start_date", startDate.ToString("yyyy-MM-dd"));
+                        command.Parameters.AddWithValue("@end_date", endDate.ToString("yyyy-MM-dd"));
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                salesData.Add(new Dictionary<string, object>
+                                {
+                                    {"id", reader["id"]},
+                                    {"barcode", reader["barcode"]},
+                                    {"product_name", reader["product_name"]},
+                                    {"quantity_sold", reader["quantity_sold"]},
+                                    {"unit_price", reader["unit_price"]},
+                                    {"total_price", reader["total_price"]},
+                                    {"sale_date", reader["sale_date"]},
+                                    {"username", reader["username"]}
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting sales data: {ex.Message}");
+            }
+            return salesData;
+        }
+
+        // Get inventory timeline data
+        public static List<Dictionary<string, object>> GetInventoryTimeline()
+        {
+            var timelineData = new List<Dictionary<string, object>>();
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string selectTimelineQuery = @"
+                        SELECT 
+                            id,
+                            product_name,
+                            sold,
+                            added,
+                            stock,
+                            price,
+                            date
+                        FROM inventory_timeline
+                        ORDER BY id DESC;";
+
+                    using (var command = new SQLiteCommand(selectTimelineQuery, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                timelineData.Add(new Dictionary<string, object>
+                                {
+                                    {"id", reader["id"]},
+                                    {"product_name", reader["product_name"]},
+                                    {"sold", reader["sold"]},
+                                    {"added", reader["added"]},
+                                    {"stock", reader["stock"]},
+                                    {"price", reader["price"]},
+                                    {"date", reader["date"]}
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting inventory timeline: {ex.Message}");
+            }
+            return timelineData;
+        }
+
+
+        public static void UpdateProductQuantity(string barcode, int newQuantity)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string updateQuery = @"
+                UPDATE inventory 
+                SET quantity = @quantity 
+                WHERE barcode = @barcode;";
+
+                    using (var command = new SQLiteCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@quantity", newQuantity);
+                        command.Parameters.AddWithValue("@barcode", barcode);
+                        command.ExecuteNonQuery();
+                        Console.WriteLine("Product quantity updated successfully!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating product quantity: {ex.Message}");
+            }
+        }
+        
+
+        // Update RecTimeLine to insert date (optional, since default is set)
+        public static void RecTimeLine(string product_name, int sold, int added, int stock, decimal price)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string insertTimelineQuery = @"
+                        INSERT INTO inventory_timeline (product_name, sold, added, stock, price, date)
+                        VALUES (@product_name, @sold, @added, @stock, @price, CURRENT_TIMESTAMP);";
+                    using (var command = new SQLiteCommand(insertTimelineQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@product_name", product_name);
+                        command.Parameters.AddWithValue("@sold", sold);
+                        command.Parameters.AddWithValue("@added", added);
+                        command.Parameters.AddWithValue("@stock", stock);
+                        command.Parameters.AddWithValue("@price", price);
+                        command.ExecuteNonQuery();
+                        Console.WriteLine("Inventory timeline record added successfully!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding inventory timeline record: {ex.Message}");
+            }
+        }
+        public static Products[] GetAlarms()
+        {
+            var alarms = new List<Products>();
+            try
+            {
+                using (var connection = new SQLiteConnection($"Data Source={DbPath}; Version=3;"))
+                {
+                    connection.Open();
+                    string query = @"
+                        SELECT barcode, product_name, price, quantity, critical_amount
+                        FROM inventory
+                        WHERE quantity <= critical_amount;";
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var barcode = reader["barcode"].ToString();
+                                var product = new Products(barcode);
+                                alarms.Add(product);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving alarm products: {ex.Message}");
+            }
+            return alarms.ToArray();
+        }
+    
+       
+
+
     }
 
 }

@@ -18,7 +18,6 @@ namespace SupermarketManagementSystem
         public LoginForm()
         {
             InitializeComponent();
-
             CenterPanel();
             _ = FormManager.PreloadFormsAsync();
         }
@@ -45,13 +44,14 @@ namespace SupermarketManagementSystem
             {
                 User user = new User(DatabaseManager.GetUserIdByUsername(usernameTxtF.Text));
                 User.CurrentUser = user;
-                user= null;
-
+                NavbarManager.rollTool();
                 // Hide the login form
                 this.Hide();
 
                 // Show the dashboard form
                 FormManager.ShowForm(this, "DashboardForm");
+                
+
 
                 // Clear the text fields
                 usernameTxtF.Text = string.Empty;
@@ -74,5 +74,16 @@ namespace SupermarketManagementSystem
 
         }
 
+
+        private void exitLbl_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            usernameTxtF.Text = "admin";
+            passwordTxtF.Text = "admin123";
+        }
     }
 }

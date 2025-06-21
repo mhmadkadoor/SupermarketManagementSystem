@@ -76,11 +76,23 @@ namespace SupermarketManagementSystem
         {
             if (formInstances.ContainsKey(formKey) && !formInstances[formKey].IsDisposed)
             {
-                formInstances[formKey].Location = currentForm.Location;
-                formInstances[formKey].Size = currentForm.Size;
+                var nextForm = formInstances[formKey];
+                nextForm.Location = currentForm.Location;
+                nextForm.Size = currentForm.Size;
                 Application.DoEvents();
-                formInstances[formKey].Show();
                 currentForm.Hide();
+
+                // Show as modal dialog and ensure it's in front and focused
+                nextForm.Shown += (s, e) =>
+                {
+                    nextForm.BringToFront();
+                    nextForm.Activate();
+                };
+                nextForm.ShowDialog(currentForm);
+                
+                // After the modal dialog closes, show the current form again
+                currentForm.Show();
+                
             }
         }
 

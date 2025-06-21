@@ -15,6 +15,7 @@ namespace SupermarketManagementSystem
         public string firstname { get; private set; }
         public string lastname { get; private set; }
         public string password { get; private set; }
+        public string roll {  get; private set; }
 
 
         public User(int id)
@@ -27,6 +28,7 @@ namespace SupermarketManagementSystem
                 this.firstname = userInfo.ContainsKey("firstname") ? userInfo["firstname"] : string.Empty;
                 this.lastname = userInfo.ContainsKey("lastname") ? userInfo["lastname"] : string.Empty;
                 this.password = userInfo.ContainsKey("password") ? userInfo["password"] : string.Empty;
+                this.roll = userInfo.ContainsKey("roll") ? userInfo["roll"] : string.Empty;
             }
             else
             {
