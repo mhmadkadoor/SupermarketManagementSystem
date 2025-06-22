@@ -1,0 +1,181 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0" version="27.1.6">
+  <diagram name="Page-1" id="xawNQxSA-GuUbvPUAfR9">
+    <mxGraphModel dx="2507" dy="1938" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-5" value="Program" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="-130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-6" value="&lt;u&gt;+Main&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-5" vertex="1">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-19" target="A_p3qt3_bed1-vWkP6F2-37" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-19" value="ReportManager" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="720" width="540" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-20" value="&lt;div&gt;&lt;u&gt;+GenerateInventoryTimelinePDF(): String&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+CreateReceiptPdf(shoppingCart: Dictionary&amp;lt;String, Products&amp;gt;, amountPaid: Decimal): String&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ CreateSalesReportPdf(startDate: DateTime, endDate: DateTime): String&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-19" vertex="1">
+          <mxGeometry y="30" width="540" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-37" value="InventoryManager&amp;nbsp;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-40" y="1020" width="335" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-43" value="&lt;div&gt;&lt;u&gt;+ AddProduct(barcode: String, name: String, quantity: int, price: double, category: String, criticalAmount: int): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ EditProduct(barcode: String, ...): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ DeleteProduct(barcode: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ SellProduct(barcode: String, quantityToSell: int): boolean&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ SellProducts(cart: Dictionary&amp;lt;String, Products&amp;gt;): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetSalesInfo(startDate: DateTime, endDate: DateTime): List&amp;lt;Dictionary&amp;lt;String, Object&amp;gt;&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetInventoryTimeline(): List&amp;lt;Dictionary&amp;lt;String, Object&amp;gt;&amp;gt;&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-37" vertex="1">
+          <mxGeometry y="30" width="335" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-52" target="A_p3qt3_bed1-vWkP6F2-79" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-52" value="User&amp;nbsp;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="457.5" y="710" width="345" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-53" value="&lt;div&gt;&lt;u&gt;+ CurrentUser: User&lt;/u&gt;&lt;/div&gt;&lt;div&gt;- id: int&lt;/div&gt;&lt;div&gt;- username: String&lt;/div&gt;&lt;div&gt;- firstname: String&lt;/div&gt;&lt;div&gt;- lastname: String&lt;/div&gt;&lt;div&gt;- password: String&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-52" vertex="1">
+          <mxGeometry y="26" width="345" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-54" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-52" vertex="1">
+          <mxGeometry y="130" width="345" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-55" value="&lt;div&gt;+ UpdateUserInfo(username: String, firstname: String, lastname: String): void&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ ChangeUserPassword(username: String, currentPassword: String, newPassword: String): void&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-52" vertex="1">
+          <mxGeometry y="138" width="345" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-117" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-57" target="A_p3qt3_bed1-vWkP6F2-43" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-57" value="Products&amp;nbsp;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-510" y="1020" width="230" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-58" value="&lt;div&gt;- name: String&lt;/div&gt;&lt;div&gt;- price: decimal&lt;/div&gt;&lt;div&gt;- amount: int&lt;/div&gt;&lt;div&gt;- barcode: String&lt;/div&gt;&lt;div&gt;- stock: int&lt;/div&gt;&lt;div&gt;- criticalAmount: int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-57" vertex="1">
+          <mxGeometry y="26" width="230" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-59" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-57" vertex="1">
+          <mxGeometry y="120" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-75" value="&lt;div&gt;+ Products(barcode: String, amount: int)&lt;/div&gt;&lt;div&gt;+ Products(barcode: String)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-57" vertex="1">
+          <mxGeometry y="150" width="230" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="A_p3qt3_bed1-vWkP6F2-68" target="A_p3qt3_bed1-vWkP6F2-100" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-68" target="A_p3qt3_bed1-vWkP6F2-105" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-68" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;FormManager&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="-180" width="330" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-69" value="- formInstances: Dictionary&amp;lt;String, Form&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-68" vertex="1">
+          <mxGeometry y="26" width="330" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-70" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-68" vertex="1">
+          <mxGeometry y="100" width="330" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-71" value="&lt;div&gt;&lt;u&gt;+ PreloadFormsAsync(): Task&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ PreloadForm(formKey: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ ShowForm(currentForm: Form, formKey: String): void&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-68" vertex="1">
+          <mxGeometry y="108" width="330" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-76" value="DB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="1097.7" y="1340" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-78" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.002;exitY=0.652;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-82" target="A_p3qt3_bed1-vWkP6F2-76" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1010" y="1380.9800000000002" as="sourcePoint" />
+            <mxPoint x="1097.7" y="1370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1057.7" y="1380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-79" value="DatabaseManager" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="1030" width="580" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-80" value="&lt;u&gt;+ readonly DbPath: String&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-79" vertex="1">
+          <mxGeometry y="26" width="580" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-81" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-79" vertex="1">
+          <mxGeometry y="60" width="580" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-82" value="&lt;div&gt;&lt;u&gt;+ InitializeDatabase(): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;&lt;br&gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ AddUser(username: String, firstname: String, lastname: String, password: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ ValidateUser(username: String, password: String): Boolean&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ ChangeUserPassword(username: String, newPassword: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ IsUsernameAveilable(username: String): Boolean&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetUserIdByUsername(username: String): Int&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetUserInfoById(id: Int): Dictionary&amp;lt;String, String&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ UpdateUserInfo(id: Int, username: String, firstname: String, lastname: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ DeleteUser(id: Int): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;&lt;br&gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ AddProduct(barcode: String, productName: String, quantity: Int, price: Double, category: String, criticalAmount: Int): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ DeleteProduct(barcode: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ EditProduct(barcode: String, productName: String, quantity: Int, price: Double, category: String, criticalAmount: Int): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetProductInfoByBarcode(barcode: String): Dictionary&amp;lt;String, Object&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ ProductExsit(barcode: String): Boolean&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetAllProducts(): Dictionary&amp;lt;String, Object&amp;gt;[]&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ SearchInv(searchTerm: String): Dictionary&amp;lt;String, Object&amp;gt;[]&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ UpdateProductQuantity(barcode: String, newQuantity: Int): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;&lt;br&gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ RecordSale(barcode: String, quantitySold: Int): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetSalesData(startDate: DateTime, endDate: DateTime): List&amp;lt;Dictionary&amp;lt;String, Object&amp;gt;&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ GetInventoryTimeline(): List&amp;lt;Dictionary&amp;lt;String, Object&amp;gt;&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ RecAction(username: String, action: String): void&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-79" vertex="1">
+          <mxGeometry y="90" width="580" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-89" target="A_p3qt3_bed1-vWkP6F2-96" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-89" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;NavbarManager&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="880" y="760" width="435" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-90" value="&lt;div&gt;&lt;u&gt;- labelInstances: Dictionary&amp;lt;String, Label&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- dashboardNavLbl: Label&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- posNavLbl: Label&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- inventoryNavLbl: Label&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- reportsNavLbl: Label&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- profileNavLbl: Label&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- logoutNavLbl: Label&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-89" vertex="1">
+          <mxGeometry y="26" width="435" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-91" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-89" vertex="1">
+          <mxGeometry y="140" width="435" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-92" value="&lt;div&gt;&lt;u&gt;+ InitializeLabels(dashboard: Label, pos: Label, inventory: Label, reports: Label, profile: Label, logout: Label): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+ SwitchTo(selectedKey: String): void&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;+&lt;/u&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;u&gt;rollTool():void&lt;/u&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-89" vertex="1">
+          <mxGeometry y="170" width="435" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-95" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;PanelManager&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="410" width="440" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-96" value="&lt;div&gt;&lt;u&gt;- formInstances: Dictionary&amp;lt;String, Panel&amp;gt;&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- dashboardPnl: Panel&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- posPnl: Panel&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- inventoryPnl: Panel&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- reportPnl: Panel&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- profilePnl: Panel&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- currentForm: Form&lt;/u&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-95" vertex="1">
+          <mxGeometry y="26" width="440" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-97" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-95" vertex="1">
+          <mxGeometry y="140" width="440" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-98" value="&lt;div&gt;+ InitializePanels(passedForm: Form, dashboard: Panel, pos: Panel, inventory: Panel, report: Panel, profile: Panel): void&lt;/div&gt;&lt;div&gt;+ ShowPanelByName(panelName: String): void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-95" vertex="1">
+          <mxGeometry y="170" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-100" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;LoginForm&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="465" y="110" width="330" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-101" value="&lt;div&gt;- notifacationLbl: Label&lt;/div&gt;&lt;div&gt;- usernameTxtF: TextEdit&lt;/div&gt;&lt;div&gt;- passwordTxtF: TextEdit&lt;/div&gt;&lt;div&gt;- loginPnl: Panel&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-100" vertex="1">
+          <mxGeometry y="26" width="330" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-102" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-100" vertex="1">
+          <mxGeometry y="90" width="330" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-103" value="&lt;div&gt;+ LoginForm()&lt;/div&gt;&lt;div&gt;- CenterPanel(): void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-100" vertex="1">
+          <mxGeometry y="120" width="330" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-105" target="A_p3qt3_bed1-vWkP6F2-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-105" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;DashboardForm&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-220" y="140" width="430" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-106" value="&lt;div&gt;- shoppingCart: Dictionary&amp;lt;String, Products&amp;gt;&lt;/div&gt;&lt;div&gt;- cartTotal: Decimal&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-105" vertex="1">
+          <mxGeometry y="26" width="430" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-107" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="A_p3qt3_bed1-vWkP6F2-105" vertex="1">
+          <mxGeometry y="70" width="430" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-108" value="&lt;div&gt;+ DashboardForm()&lt;/div&gt;&lt;div&gt;+ LoadDashboardData(): void&lt;/div&gt;&lt;div&gt;+ LoadInvTable(): void&lt;/div&gt;&lt;div&gt;+ LoadSalesTable(startDate: DateTime, endDate: DateTime): void&lt;/div&gt;&lt;div&gt;+ LoadAlarmPanel(): void&lt;/div&gt;&lt;div&gt;+ ProcessBarcode(barcode: String, amount: Int): void&lt;/div&gt;&lt;div&gt;+ updateCart(): void&lt;/div&gt;&lt;div&gt;+ cashOutRefresh(): void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="A_p3qt3_bed1-vWkP6F2-105" vertex="1">
+          <mxGeometry y="100" width="430" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-114" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.005;entryY=0.841;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-37" target="A_p3qt3_bed1-vWkP6F2-108" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-115" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=1.005;entryY=0.687;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-52" target="A_p3qt3_bed1-vWkP6F2-108" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="544" y="670" />
+              <mxPoint x="350" y="670" />
+              <mxPoint x="350" y="329" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.005;entryY=0.441;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-95" target="A_p3qt3_bed1-vWkP6F2-108" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A_p3qt3_bed1-vWkP6F2-118" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.15;entryY=1.038;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="A_p3qt3_bed1-vWkP6F2-82" target="A_p3qt3_bed1-vWkP6F2-43" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="1340" as="sourcePoint" />
+            <mxPoint x="190" y="1100" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="10" y="1320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
