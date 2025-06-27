@@ -1,0 +1,1 @@
+⚠️⚠️⚠️⚠️After you set up the SMS app, don't forget to open it in administrator mode to avoid issues with the database⚠️⚠️⚠️⚠️
